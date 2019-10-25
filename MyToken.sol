@@ -3,8 +3,18 @@ pragma solidity ^0.5.10;
 contract MyToken {
     mapping(address => uint256) private _balances;
 
-    constructor(uint256 initialSupply) public {
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals;
+    uint256 private _totalSupply;
+
+    constructor(uint256 initialSupply, string memory tokenName, string memory tokenSymbol, uint8 decimalUnits) public {
         _balances[msg.sender] = initialSupply;
+        _totalSupply = initialSupply;
+        _symbol = tokenSymbol;
+        _name = tokenName;
+        _decimals = decimalUnits;
+
     }
 
     function balanceOf(address account) public view returns (uint256){
