@@ -17,6 +17,26 @@ contract MyToken {
 
     }
 
+    function name() public view returns (string memory){
+        return _name;
+    }
+
+    function symbol() public view returns (string memory){
+        return _symbol;
+    }
+
+    function decimals() public view returns (uint8){
+        return _decimals;
+    }
+
+    function totalSupply() public view returns (uint256){
+        return _totalSupply;
+    }
+
+     function setTotalSupply(uint256 totalAmount) internal{
+       _totalSupply = totalAmount;
+    }
+
     function balanceOf(address account) public view returns (uint256){
         return _balances[account];
     }
