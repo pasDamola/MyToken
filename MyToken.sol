@@ -46,6 +46,9 @@ contract MyToken {
     }
     
     function transfer(address beneficiary, uint256 amount) public returns (bool){
+        require(beneficiary != address(0), "Beneficiary address cannot be zero");
+        require(_balances[msg.sender] >= amount, "Sender does not have enough balance");
+        require(_balances[beneficiary] + amount > _balances[beneficiary], "Addition Overflow!");
         _balances[msg.sender] -= amount;
         _balances[beneficiary] += amount;
         return true;
