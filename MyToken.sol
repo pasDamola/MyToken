@@ -8,6 +8,8 @@ contract MyToken {
     uint8 private _decimals;
     uint256 private _totalSupply;
 
+    event Transfer(address indexed from, address indexed to, uint256 value);
+
     constructor(uint256 initialSupply, string memory tokenName, string memory tokenSymbol, uint8 decimalUnits) public {
         _balances[msg.sender] = initialSupply;
         _totalSupply = initialSupply;
@@ -51,6 +53,9 @@ contract MyToken {
         require(_balances[beneficiary] + amount > _balances[beneficiary], "Addition Overflow!");
         _balances[msg.sender] -= amount;
         _balances[beneficiary] += amount;
+
+        emit Transfer(msg.sender, beneficiary, amount);
+
         return true;
     }
 
