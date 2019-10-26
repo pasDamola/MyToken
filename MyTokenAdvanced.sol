@@ -120,13 +120,23 @@ contract MyToken {
 }
 
 contract MyTokenAdvanced is MyToken, Administrable{
-    constructor(uint256 initialSupply, string memory tokenName, string memory tokenSymbol, uint8 decimalUnits, address newAdmin) public{
-        MyToken(0, tokenName, tokenSymbol, decimalUnits){
+    constructor(uint256 initialSupply, string memory tokenName, string memory tokenSymbol, uint8 decimalUnits, address newAdmin) public
+        MyToken(0, tokenName, tokenSymbol, decimalUnits) {
             if(newAdmin != address(0) && newAdmin != msg.sender)
               transferAdminship(newAdmin);
             
             setBalance(admin(), initialSupply);
             setTotalSupply(initialSupply);
         }
-    }
+
+        function mintToken(address target, uint256 mintedAmount) public onlyAdmin{
+            require(balanceOf(target) + mintedAmount > balanceOf(target), "Addition Overflow");
+            require(totalSupply() + mintedAmount > totalSupply(), "Addition Overflow");
+
+            setBalance(target, balanceOf(target) + mintedAmount);
+            setTotalSupply(totalSupply() + mintedAmount);
+            emit Transfer(address(0), target, mintedAmount);
+        }
+        
+    
 }
