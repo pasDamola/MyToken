@@ -11,4 +11,4 @@
 ● Buy or sell price must be set by Admin only at any time.
 ● Admin must be able to transfer the administrator role to any other address
 ● Admin must be able to mint new MyTokens to anyone’s address
-● Admin must be able to freeze or unfreeze tokens of anyone’s account. ● MyToken should be ERC20 complain
+● Admin must be able to freeze or unfreeze tokens of anyone’s account.
